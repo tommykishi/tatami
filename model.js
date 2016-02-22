@@ -9,6 +9,8 @@ util.TreeNode = function(object) {
 	this.ex = object.extension || [];
 	this.depth = object.depth || 0;
 	this.rel = new Map();
+  if(){
+  }
 };
 
 util.Tree = function() {
