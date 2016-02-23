@@ -1,13 +1,16 @@
 src/
-	index.js
-	main.css
-	test
+  index.js
+  main.css
+  test
 dist/
-	index.coffee
-	main.scss
-	set/
-		less.txt
+  index.coffee
+  main.scss
+  set/
+    less.txt
 public/
     cat.img
     cat2.img
     cat3.img
+game/
+  win.txt
+  lose.txt
