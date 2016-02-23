@@ -55,9 +55,4 @@ describe('model test', () => {
 			//rel
 		});
 	});
-	describe('Tree', () => {
-		it('Tree', () => {
-
-		});
-	});
 });

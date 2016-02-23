@@ -28,27 +28,39 @@ util.Tree = function() {
 		this.scan();
 	};
 
+	this.checkParents = function(node) {
+		var prr = [];
+        //おかしい
+		if (node.rel.get('parent') == undefined) {
+			return prr.join("/");
+		} else {
+			let parent = node.rel.get('parent')
+			prr.push(parent);
+			return this.checkParents(parent);
+		}
+	};
+
 	this.path = function() {
 		_.map(arr, function(node) {
 			if (node.rel.get('parent')) {
-				let parent = node.rel.get('parent');
-				let cpath = `${parent.filename}/${node.filename}`;
-				//path join うまくいかない
-				node.filepath = path.join(parent.filepath, cpath);
+				//node.filepath = self.checkParents(node);
 			} else {
 				node.filepath = `${node.filename}`;
 			}
 		});
-	};
+	}
 
 	this.getpath = function() {
 		_.each(arr, function(node) {
 			console.log(node.filepath);
 		});
 	};
+	this.getArray = function(){
+		return arr;
+	}
 
 	this.scan = function() {
-		//TODO:リファクタリング
+		//TODO :リファクタリング
 		for (var i = 0; i < arr.length; i++) {
 			for (var j = 1; j < arr.length; j++) {
 				if (arr.length == i + j) break;

@@ -18,5 +18,6 @@ rl.on('line', function(line) {
 rl.on('close', function() {
   var tree = new model.Tree();
   tree.add(arr);
-  tree.getpath();
+  //tree.getpath();
+  console.log(tree.getArray());
 });
