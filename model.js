@@ -19,16 +19,36 @@ util.TreeNode = function(object) {
 };
 
 util.Tree = function() {
-	this.counter = 0;
 	var arr = [];
 	this.add = function(args) {
 		_.each(args, function(object) {
-			var node = new util.TreeNode(object);
+			let node = new util.TreeNode(object);
 			arr.push(node);
 		});
 		this.scan();
 	};
+
+	this.path = function() {
+		_.map(arr, function(node) {
+			if (node.rel.get('parent')) {
+				let parent = node.rel.get('parent');
+				let cpath = `${parent.filename}/${node.filename}`;
+				//path join うまくいかない
+				node.filepath = path.join(parent.filepath, cpath);
+			} else {
+				node.filepath = `${node.filename}`;
+			}
+		});
+	};
+
+	this.getpath = function() {
+		_.each(arr, function(node) {
+			console.log(node.filepath);
+		});
+	};
+
 	this.scan = function() {
+		//TODO:リファクタリング
 		for (var i = 0; i < arr.length; i++) {
 			for (var j = 1; j < arr.length; j++) {
 				if (arr.length == i + j) break;
@@ -48,21 +68,6 @@ util.Tree = function() {
 			}
 		}
 		this.path();
-	};
-	this.path = function() {
-		_.map(arr, function(node) {
-			if (node.rel.get('parent')) {
-				let parent = node.rel.get('parent');
-				node.filepath = `${parent.filename}/${node.filename}`
-			} else {
-				node.filepath = `${node.filename}`;
-			}
-		});
-	};
-	this.getPath = function() {
-		_.map(arr, function(node) {
-			console.log(node.filepath);
-		});
 	};
 };
 
