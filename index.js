@@ -1,9 +1,9 @@
 const fs = require('fs'),
 	  readline = require('readline'),
-	  rs = fs.ReadStream('./Antfile'),
+	  rs = fs.ReadStream('./Tatamifile'),
 	  rl = readline.createInterface({
 	    'input': rs,
-		'output': {}
+			'output': {}
 	  });
 
 const parser = require('./peg.js');

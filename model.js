@@ -45,6 +45,8 @@ util.Tree = function() {
 				} else if (arr[i].depth == arr[i + j].depth) {
 					arr[i + j].rel.set("parent", arr[i].rel.get("parent"));
 					break;
+				}else if(arr[i].depth > arr[i+j].depth && arr[i].depth != arr[i-1].depth ){
+					arr[i].rel.set("parent", arr[i-1]);
 				} else {
 					//arr[i].depth > arr[i+j].depth
 					arr[i].rel.set("parent", arr[i - 1].rel.get("parent"));
