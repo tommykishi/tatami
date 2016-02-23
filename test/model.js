@@ -30,12 +30,29 @@ describe('model test', () => {
 	describe('treeNode', () => {
 		it('dir', () => {
 			let node = new model.TreeNode(dir);
+			node.should.have.property('type', 'directory');
+			node.filename.should.be.string('apple');
+			node.ws.length.should.be.eql(0);
+			node.ex.should.be.empty;
+			node.depth.should.be.eql(0);
+			//rel
 		});
 		it('file', () => {
 			let node = new model.TreeNode(file);
+			node.should.have.property('type', 'file');
+			node.filename.should.be.string('apple.txt');
+			node.ws.length.should.be.eql(0);
+			node.depth.should.be.eql(0);
+			//rel
 		});
 		it('comment', () => {
 			let node = new model.TreeNode(comment);
+			node.should.have.property('type', 'comment');
+			node.name.should.be.empty;
+			node.ws.length.should.be.eql(0);
+			node.ex.should.be.empty;
+			node.depth.should.be.eql(0);
+			//rel
 		});
 	});
 	describe('Tree', () => {
@@ -43,7 +60,4 @@ describe('model test', () => {
 
 		});
 	});
-
-
-
 });

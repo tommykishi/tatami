@@ -1,6 +1,8 @@
 'use strict'
+
 var util = {};
 const _ = require('lodash');
+const path = require('path');
 
 util.TreeNode = function(object) {
 	this.type = object.type;
@@ -9,8 +11,11 @@ util.TreeNode = function(object) {
 	this.ex = object.extension || [];
 	this.depth = object.depth || 0;
 	this.rel = new Map();
-  if(){
-  }
+	if (this.ex.length != 0) {
+		this.filename = `${this.name.join("")}.${this.ex.join("")}`
+	} else {
+		this.filename = `${this.name.join("")}`
+	}
 };
 
 util.Tree = function() {
@@ -23,18 +28,6 @@ util.Tree = function() {
 		});
 		this.scan();
 	};
-	this.getNode = function() {
-		return arr;
-	};
-    this.getPath = function() {
-        _.map(arr, function(node) {
-            if(node.rel.get('parent')){
-                console.log(`${__dirname}/${node.rel.get('parent').name.join("")}/${node.name.join("")}.${node.ex.join("")}`);
-            }else{
-                console.log(`${__dirname}/${node.name.join("")}`);
-            }
-        });
-    };
 	this.scan = function() {
 		for (var i = 0; i < arr.length; i++) {
 			for (var j = 1; j < arr.length; j++) {
@@ -45,8 +38,8 @@ util.Tree = function() {
 				} else if (arr[i].depth == arr[i + j].depth) {
 					arr[i + j].rel.set("parent", arr[i].rel.get("parent"));
 					break;
-				}else if(arr[i].depth > arr[i+j].depth && arr[i].depth != arr[i-1].depth ){
-					arr[i].rel.set("parent", arr[i-1]);
+				} else if (arr[i].depth > arr[i + j].depth && arr[i].depth != arr[i - 1].depth) {
+					arr[i].rel.set("parent", arr[i - 1]);
 				} else {
 					//arr[i].depth > arr[i+j].depth
 					arr[i].rel.set("parent", arr[i - 1].rel.get("parent"));
@@ -54,6 +47,22 @@ util.Tree = function() {
 				}
 			}
 		}
+		this.path();
+	};
+	this.path = function() {
+		_.map(arr, function(node) {
+			if (node.rel.get('parent')) {
+				let parent = node.rel.get('parent');
+				node.filepath = `${parent.filename}/${node.filename}`
+			} else {
+				node.filepath = `${node.filename}`;
+			}
+		});
+	};
+	this.getPath = function() {
+		_.map(arr, function(node) {
+			console.log(node.filepath);
+		});
 	};
 };
 

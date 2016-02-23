@@ -5,9 +5,8 @@ src/
 dist/
 	index.coffee
 	main.scss
-		set/
-			map.md
-			less.txt
+	set/
+		less.txt
 public/
     cat.img
     cat2.img
