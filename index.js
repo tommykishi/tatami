@@ -5,7 +5,7 @@ const fs = require('fs'),
     'input': rs,
     'output': {}
   }),
-  parser = require('./peg.js'),
+  parser = require('./peg/peg.js'),
   model = require('./model.js');
 
 const tree = new model.Tree();
@@ -16,8 +16,6 @@ rl.on('line', function(line) {
 });
 
 rl.on('close', function() {
-  var tree = new model.Tree();
-  tree.add(arr);
-  //tree.getpath();
-  console.log(tree.getArray());
+  var tree = new model.Tree(arr);
+  //console.log(tree.getArray());
 });

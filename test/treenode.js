@@ -1,7 +1,7 @@
 'use strict'
 
 const model = require('../model.js');
-const parser = require('../peg.js');
+const parser = require('../peg/peg.js');
 const should = require('chai').should();
 
 const fs = require('fs'),
@@ -36,7 +36,6 @@ describe('model test', () => {
 			node.ex.should.be.empty;
 			node.depth.should.be.eql(0);
 			//rel
-            //filename
 		});
 		it('file', () => {
 			let node = new model.TreeNode(file);

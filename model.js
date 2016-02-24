@@ -18,7 +18,7 @@ util.TreeNode = function(object) {
 	}
 };
 
-util.Tree = function() {
+util.Tree = function(nodearr) {
 	var arr = [];
 
 	this.getPath = function() {
@@ -29,7 +29,7 @@ util.Tree = function() {
 		return path;
 	};
 
-	this.getArray = function(){
+	this.getArray = function() {
 		return arr;
 	};
 
@@ -38,17 +38,7 @@ util.Tree = function() {
 			let node = new util.TreeNode(object);
 			arr.push(node);
 		});
-		this.scan();
-	};
-
-	this.path = function() {
-		_.map(arr, function(node) {
-			if (node.rel.get('parent')) {
-				//node.filepath = self.checkParents(node);
-			} else {
-				node.filepath = `${node.filename}`;
-			}
-		});
+		return this;
 	};
 
 	this.scan = function() {
@@ -64,14 +54,39 @@ util.Tree = function() {
 					break;
 				} else if (arr[i].depth > arr[i + j].depth && arr[i].depth != arr[i - 1].depth) {
 					arr[i].rel.set("parent", arr[i - 1]);
-				} else {//arr[i].depth > arr[i+j].depth
+				} else {
+					//arr[i].depth > arr[i+j].depth
 					arr[i].rel.set("parent", arr[i - 1].rel.get("parent"));
 					break;
 				}
 			}
 		}
-		this.path();
+		return this;
 	};
+
+    //おかしい
+	this.check = function(node) {
+       let parent = node.rel.get('parent')
+       if(parent != undefined){
+           return parent;
+       }else{
+
+       }
+	};
+
+    //おかしい
+	this.path = function() {
+		var self = this;
+		_.map(arr, function(node) {
+			var arr = [];
+			arr.push(self.check(node));
+			node.filepath = arr.join("/");
+            console.log(node.filepath);
+		});
+		return this;
+	};
+
+	this.add(nodearr).scan().path();
 };
 
 module.exports = util;

@@ -1,6 +1,6 @@
 'use strict'
 
-const parser = require('../peg.js');
+const parser = require('../peg/peg.js');
 const should = require('chai').should();
 
 describe('Pegjs parser test', () => {
