@@ -1,9 +1,9 @@
 'use strict'
 
-const parser = require('../peg.js');
+const parser = require('../peg/peg.js');
 const should = require('chai').should();
 
-describe('myPegjs parser test', () => {
+describe('Pegjs parser test', () => {
 	describe('if file be parsed corrctly ', () => {
 		it('general file', () => {
 			parser.parse('apple.md').should.have.property('type', 'file');

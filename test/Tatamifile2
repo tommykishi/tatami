@@ -1,0 +1,12 @@
+pineapple/
+    pine.txt
+apple/
+    apple.txt
+    apple2.txt
+apricot/
+    taste/
+        good.md
+        bad.md
+        list/
+          index.html
+          main.css
