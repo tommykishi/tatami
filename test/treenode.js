@@ -36,6 +36,7 @@ describe('model test', () => {
 			node.ex.should.be.empty;
 			node.depth.should.be.eql(0);
 			//rel
+            //filename
 		});
 		it('file', () => {
 			let node = new model.TreeNode(file);
