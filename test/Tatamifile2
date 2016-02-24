@@ -7,3 +7,6 @@ apricot/
     taste/
         good.md
         bad.md
+        list/
+          index.html
+          main.css
