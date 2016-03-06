@@ -8,8 +8,9 @@ const fs = require('fs'),
   parser = require('./peg/peg.js'),
   model = require('./model.js');
 
-const tree = new model.Tree();
-const arr = [];
+const _ = require('lodash');
+
+var arr = [];
 
 rl.on('line', function(line) {
   arr.push(parser.parse(line));
@@ -17,5 +18,13 @@ rl.on('line', function(line) {
 
 rl.on('close', function() {
   var tree = new model.Tree(arr);
-  //console.log(tree.getArray());
+  console.log(tree.getArray());
 });
+
+/*
+_.map(tmp, function(node){
+  console.log(node.name);
+  console.log(node.rel);
+  console.log("");
+});
+*/
