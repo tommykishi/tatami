@@ -54,7 +54,7 @@ describe('Tree', () => {
 		treearr[10].rel.get('parent').should.be.eql(treearr[9]);
 		treearr[11].rel.get('parent').should.be.eql(treearr[9]);
 	});
-	
+
 	it('path test', () => {
 		/*
 	       0pineapple/
@@ -71,17 +71,17 @@ describe('Tree', () => {
 			          11main.css
 	    */
 		let patharr = tree.getPath();
-		patharr[0].should.be.string('pineapple/');
-		patharr[1].should.be.string('pineapple/pine.txt');
-		patharr[2].should.be.string('apple/');
-		patharr[3].should.be.string('apple/apple.txt');
-		patharr[4].should.be.string('apple/apple2.txt');
-		patharr[5].should.be.string('apricot/');
-		patharr[6].should.be.string('apricot/taste/');
-		patharr[7].should.be.string('apricot/taste/good.md');
-		patharr[8].should.be.string('apricot/taste/bad.md');
-		patharr[9].should.be.string('apricot/taste/list/');
-		patharr[10].should.be.string('apricot/taste/list/index.html');
-		patharr[11].should.be.string('apricot/taste/list/main.css');
+		patharr[0].should.be.string('/pineapple');
+		patharr[1].should.be.string('/pineapple/pine.txt');
+		patharr[2].should.be.string('/apple');
+		patharr[3].should.be.string('/apple/apple.txt');
+		patharr[4].should.be.string('/apple/apple2.txt');
+		patharr[5].should.be.string('/apricot');
+		patharr[6].should.be.string('/apricot/taste');
+		patharr[7].should.be.string('/apricot/taste/good.md');
+		patharr[8].should.be.string('/apricot/taste/bad.md');
+		patharr[9].should.be.string('/apricot/taste/list');
+		patharr[10].should.be.string('/apricot/taste/list/index.html');
+		patharr[11].should.be.string('/apricot/taste/list/main.css');
 	});
 });

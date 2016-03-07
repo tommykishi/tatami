@@ -3,7 +3,6 @@
 var util = {};
 const _ = require('lodash');
 
-
 util.TreeNode = function(object) {
 	this.type = object.type;
 	this.name = object.name || [];
@@ -18,18 +17,28 @@ util.Tree = function(nodearr) {
 		return arr;
 	};
 
+    this.getPath = function() {
+        var patharr = [];
+        _.map(arr, function(node){
+            patharr.push(node.path)
+        });
+        return patharr;
+    }
+
 	this.plant = function(args) {
 		_.each(args, function(object) {
 			let node = new util.TreeNode(object);
-			arr.push(node);
+			if (node.type != 'comment') {
+				arr.push(node);
+			}
 		});
+		this.createAst(arr.length - 1);
 		return this;
 	};
 
 	this.createAst = function(c) {
 		if (c < 0) {
-            this.pather(c);
-            return this;
+			return this;
 		} else if (arr[c].depth == 0) {
 			this.createAst(c - 1);
 		} else {
@@ -49,12 +58,28 @@ util.Tree = function(nodearr) {
 		if (c < 0) {
 			return;
 		} else {
-			arr[c].path = `${__dirname}/${arr[c].name}`
-			this.pather(c - 1);
+            var path = [];
+            var t = c;
+            while(1){
+                if(!arr[t].rel.get('parent')){
+                  break;
+                }
+                var tmp = arr[t].rel.get('parent');
+                path.unshift(tmp.name);
+                var pindex = _.indexOf(arr, tmp);
+                t -= t - pindex;
+            }
+            if(path.length != 0){
+                arr[c].path = `/${path.join("/")}/${arr[c].name}`
+            }else{
+                arr[c].path = `/${arr[c].name}`
+            }
+            this.pather(c - 1);
 		}
 	};
 
-	this.plant(nodearr).createAst(arr.length - 1);
+	this.plant(nodearr).pather(arr.length -1);
+
 };
 
 module.exports = util;
