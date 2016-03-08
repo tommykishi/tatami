@@ -37,7 +37,7 @@ describe('Pegjs parser test', () => {
 	});
 	describe('if comment be parsed correctly', () => {
 		it('single comment', () => {
-			parser.parse('//singlecomment').should.have.property('type', 'comment');
+			parser.parse('//  singlecomment').should.have.property('type', 'comment');
 		});
 		it('multiline comment', () => {
 			//parser.parse('/*multilinecomment*/').should.have.property('type', 'comment');

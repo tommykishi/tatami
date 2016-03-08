@@ -23,7 +23,6 @@ rl.on('close', function() {
 	dir = arr[0];
 	file = arr[1];
 	comment = arr[2];
-	comment2 = arr[3];
 });
 
 describe('model test', () => {
