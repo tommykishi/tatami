@@ -5,6 +5,7 @@ const program = require('commander'),
 	fs = require('fs'),
 	readline = require('readline'),
 	colors = require('colors'),
+	async = require('async'),
 	parser = require('./peg/peg.js'),
 	model = require('./model.js');
 
@@ -37,14 +38,24 @@ fs.stat('./Tatamifile', (err, stat) => {
 
 var createTree = function(arr) {
 	const treeArr = new model.Tree(arr).getArray();
-	_.map(treeArr, function(node, index) {
-		if (node.type == 'file') {
-			let path = `${process.cwd()}${node.path}`;
-			fs.writeFileSync(path);
-		} else {
-			let path = `${process.cwd()}${node.path}`;
-			fs.mkdirSync(path);
+	const group = _.groupBy(treeArr, 'type');
+	async.waterfall([
+		function(next) {
+			_.map(group.file, function(node) {
+				let path = `${process.cwd()}${node.path}`;
+				fs.unlinkSync(path);
+			});
+			next();
+		},
+		function(next) {
+			_.map(group.directory, function(node) {
+				let path = `${process.cwd()}${node.path}`;
+				fs.rmdirSync(path);
+			});
+			next();
 		}
+	], function(err, result) {
+		if (err) console.error(err);
+		console.log('tatami rollback');
 	});
-	console.log('tatami run');
 };

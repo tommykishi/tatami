@@ -6,7 +6,8 @@ program
 	.usage('is tool for making folder structure!')
 	.command('init', "create Tatamifile")
 	.command('run', "parse Tatamifile, make folder structure")
-	.command('path', "output Tatamifile in path");
+	.command('path', "output Tatamifile in path")
+	.command('rollback', "roll back");
 
 program.parse(process.argv);
 //ok
