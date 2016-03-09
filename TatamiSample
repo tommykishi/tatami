@@ -1,0 +1,14 @@
+dist/
+  css/
+    main.css
+  js/
+    main.js
+  index.html
+src/
+  index.jade
+  main.scss
+  main.coffee
+test/
+  test.js
+README.md
+gulpfile.js

@@ -1,9 +1,11 @@
 {
-  "name": "ant",
+  "name": "tatami",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Tatami is tool for making folder structure",
   "dependencies": {
+    "async": "^1.5.2",
+    "colors": "^1.1.2",
+    "commander": "^2.9.0",
     "lodash": "^4.5.0"
   },
   "devDependencies": {
@@ -14,5 +16,9 @@
     "test": "mocha"
   },
   "author": "Tomoya Kishimoto <h17184b@gmail.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "bin": {
+    "tatami": "tatami.js"
+  },
+  "preferGlobal": true
 }
