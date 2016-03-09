@@ -5,9 +5,50 @@
 	<title>Tatami</title>
 	<link rel="stylesheet" href="./bower_components/bootstrap/dist/css/bootstrap.css">
 	<link rel="stylesheet" href="./main.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="./bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
-	<h1>tatami</h1>
-	<script src="./bower_components/jquery/dist/jquery.js"></script>
+	<header>
+		<h1><img class="logo" src="./logo.png" alt="logo"><span>Tatami</span></h1>
+		<h2>Tatami is tool for making folder structure <a href="https://github.com/tommykishi/tatami"><i class='fa fa-github'></i></a></h2>
+		<span class="command"><i class='fa fa-terminal'></i>  npm install -g tatami</span>
+	</header>
+	<main>
+		<h2>Getting started</h2>
+		<div class="main">
+			<div class="commands">
+				<div class="frame">
+					<h3>Create Tatamifile</h3>
+					<span class="command"><i class='fa fa-terminal'></i>  tatami init</span>
+				</div>
+				<div class="frame">
+					<h3>Run tatami</h3>
+					<span class="command"><i class='fa fa-terminal'></i>  tatami run</span>
+				</div>
+				<div class="frame">
+					<h3>Rollback</h3>
+					<span class="command"><i class='fa fa-terminal'></i>  tatami rollback</span>
+				</div>
+				<div class="frame">
+					<h3>Output Path</h3>
+					<span class="command"><i class='fa fa-terminal'></i>  tatami path</span>
+				</div>
+			</div>
+
+			<h3>Learn Tatami grammer in 30 seconds</h3>
+			<div class="grammer">
+				<script src="https://gist.github.com/tommykishi/27602127489f960eec35.js"></script>
+			</div>
+			<div class="doc">
+			<p>1. Tatami parses indent, make folder structure.</p>
+			<p>2. In case "Directory", after directory name, attach "/".</p>
+			<p>3. Sentence has extension or no extension, tatami recognizes "File".</p>
+			<p>4. "Comment" is allowed only oneline comment, begin "//"</p>
+			</div>
+		</div>
+		</div>
+	</main>
+	<footer><a href="https://github.com/tommykishi">@tommykishi</a></footer>
 </body>
 </html>
