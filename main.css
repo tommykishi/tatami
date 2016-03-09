@@ -19,10 +19,9 @@ h3 {
 main {
 	background-color: #E0E0E0;
 	border-radius: 5px;
-	margin: 0 10px;
+	margin: 20px 10px 0px 10px;
 	padding: 5px 0;
 	padding-bottom: 20px;
-	margin-top: 20px;
 }
 h1 span {
 	vertical-align: middle;
@@ -32,9 +31,12 @@ footer {
 	margin-bottom: 10px;
 	text-align: center;
 }
+i {
+	color: #006E54;
+}
 .command {
 	background-color: #b7edd2;
-	padding: 5px 10px;
+	padding: 5px 15px;
 	border-radius: 5px;
 	font-size: 14px;
 	box-shadow: 2px 2px;
