@@ -45,6 +45,7 @@ i {
 	width: 50px;
 	height: 50px;
 	margin: 10px;
+	vertical-align: middle;
 }
 .grammer {
 	margin: 0 30px;
