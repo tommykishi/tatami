@@ -11,14 +11,14 @@ util.TreeNode = function(object) {
 };
 
 util.Tree = function(nodearr) {
-  var arr = [];
+  const arr = [];
 
   this.getArray = function() {
     return arr;
   };
 
   this.getPath = function() {
-    var patharr = [];
+    const patharr = [];
     _.map(arr, function(node) {
       patharr.push(node.path);
     });
@@ -42,7 +42,7 @@ util.Tree = function(nodearr) {
     } else if (arr[c].depth == 0) {
       this.createAst(c - 1);
     } else {
-      var i = 1;
+      let i = 1;
       while (1) {
         if ((c - i) < 0) break;
         if (arr[c].depth > arr[c - i].depth) break;
@@ -57,11 +57,11 @@ util.Tree = function(nodearr) {
     if (c < 0) {
       return;
     } else {
-      var path = [];
-      var t = c;
+      const path = [];
+      let t = c;
       while (1) {
-        if (!arr[t].rel.get('parent')) break;
-        var parent = arr[t].rel.get('parent');
+        let parent = arr[t].rel.get('parent');
+        if (!parent) break;
         path.unshift(parent.name);
         t -= t - _.indexOf(arr, parent);
       }

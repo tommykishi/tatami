@@ -1,16 +1,18 @@
 //tatami path
+'use strict'
 const program = require('commander'),
 	_ = require('lodash'),
 	fs = require('fs'),
 	colors = require('colors');
-	parser = require('./peg/peg.js'),
-	model = require('./model.js');
 
-var arr = [];
+const parser = require('./peg/peg.js'),
+	model = require('./model.js');
 
 program.parse(process.argv);
 
 fs.stat('./Tatamifile', (err, stat) => {
+	const arr = [];
+
 	if (err == null) {
 		const readline = require('readline'),
 			rs = fs.ReadStream('./Tatamifile'),
@@ -26,7 +28,7 @@ fs.stat('./Tatamifile', (err, stat) => {
 		rl.on('close', function() {
 			pathlog(arr);
 		});
-		
+
 	} else if (err.code == 'ENOENT') {
 		console.log(colors.red.bold('Tatamifile not found'));
 	} else {
@@ -34,9 +36,27 @@ fs.stat('./Tatamifile', (err, stat) => {
 	}
 });
 
-var pathlog = function(arr){
+const pathlog = function(arr) {
 	const treeArr = new model.Tree(arr).getArray();
 	_.map(treeArr, function(node, index) {
 		console.log(` ${colors.cyan(index)} ${process.cwd()}${_.at(node,'path').toString()}`);
 	});
+	message(treeArr);
 };
+
+const message = function(treeArr){
+	const group = _.groupBy(treeArr,'type');
+	if (1 < group.directory.length) {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directories, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directories, ${group.file.length} file`);
+		}
+	} else {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directory, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directory, ${group.file.length} file`);
+		}
+	}
+}
