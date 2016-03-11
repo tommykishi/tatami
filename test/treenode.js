@@ -1,8 +1,8 @@
 'use strict'
 
-const model = require('../model.js');
-const parser = require('../peg/peg.js');
-const should = require('chai').should();
+const model = require('../model.js'),
+	parser = require('../peg/peg.js'),
+	should = require('chai').should();
 
 const fs = require('fs'),
 	readline = require('readline'),
@@ -13,7 +13,7 @@ const fs = require('fs'),
 	});
 
 const arr = [];
-var dir, file, comment, comment2;
+var dir, file, comment;
 
 rl.on('line', function(line) {
 	arr.push(parser.parse(line));

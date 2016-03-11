@@ -3,18 +3,18 @@
 const program = require('commander'),
 	_ = require('lodash'),
 	fs = require('fs'),
-	readline = require('readline'),
-	colors = require('colors'),
-	parser = require('./peg/peg.js'),
-	model = require('./model.js');
+	colors = require('colors');
 
-var arr = [];
+const parser = require('./peg/peg.js'),
+	model = require('./model.js');
 
 program.parse(process.argv);
 
 fs.stat('./Tatamifile', (err, stat) => {
+	const arr = [];
 	if (err == null) {
-		const rs = fs.ReadStream('./Tatamifile'),
+		const readline = require('readline'),
+			rs = fs.ReadStream('./Tatamifile'),
 			rl = readline.createInterface({
 				'input': rs,
 				'output': {}
@@ -35,16 +35,35 @@ fs.stat('./Tatamifile', (err, stat) => {
 	}
 });
 
-var createTree = function(arr) {
+const createTree = function(arr) {
 	const treeArr = new model.Tree(arr).getArray();
-	_.map(treeArr, function(node, index) {
+	_.map(treeArr, function(node) {
 		if (node.type == 'file') {
+			const data = "";
 			let path = `${process.cwd()}${node.path}`;
-			fs.writeFileSync(path);
+			fs.writeFileSync(path, data);
 		} else {
 			let path = `${process.cwd()}${node.path}`;
 			fs.mkdirSync(path);
 		}
 	});
-	console.log('tatami run');
+	console.log(colors.red.bold('tatami run'));
+	message(treeArr);
 };
+
+const message = function(treeArr){
+	const group = _.groupBy(treeArr,'type');
+	if (1 < group.directory.length) {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directories, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directories, ${group.file.length} file`);
+		}
+	} else {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directory, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directory, ${group.file.length} file`);
+		}
+	}
+}

@@ -7,7 +7,6 @@ program
 	.command('init', "create Tatamifile")
 	.command('run', "parse Tatamifile, make folder structure")
 	.command('path', "output Tatamifile in path")
-	.command('rollback', "roll back");
+	.command('rollback', "roll back before tatami run");
 
 program.parse(process.argv);
-//ok

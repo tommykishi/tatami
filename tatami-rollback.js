@@ -1,21 +1,22 @@
-//tatami run
+//tatami rollback
 'use strict'
 const program = require('commander'),
 	_ = require('lodash'),
 	fs = require('fs'),
-	readline = require('readline'),
 	colors = require('colors'),
-	async = require('async'),
-	parser = require('./peg/peg.js'),
-	model = require('./model.js');
+	async = require('async');
 
-var arr = [];
+const parser = require('./peg/peg.js'),
+	model = require('./model.js');
 
 program.parse(process.argv);
 
 fs.stat('./Tatamifile', (err, stat) => {
+	const arr = [];
+
 	if (err == null) {
-		const rs = fs.ReadStream('./Tatamifile'),
+		const readline = require('readline'),
+			rs = fs.ReadStream('./Tatamifile'),
 			rl = readline.createInterface({
 				'input': rs,
 				'output': {}
@@ -36,7 +37,7 @@ fs.stat('./Tatamifile', (err, stat) => {
 	}
 });
 
-var createTree = function(arr) {
+const createTree = function(arr) {
 	const treeArr = new model.Tree(arr).getArray();
 	const group = _.groupBy(treeArr, 'type');
 	async.waterfall([
@@ -48,7 +49,8 @@ var createTree = function(arr) {
 			next();
 		},
 		function(next) {
-			_.map(group.directory, function(node) {
+			let dir = _.sortBy(group.directory, 'depth');
+			_.map(_.reverse(dir), function(node) {
 				let path = `${process.cwd()}${node.path}`;
 				fs.rmdirSync(path);
 			});
@@ -56,6 +58,24 @@ var createTree = function(arr) {
 		}
 	], function(err, result) {
 		if (err) console.error(err);
-		console.log('tatami rollback');
+		console.log(colors.red.bold('tatami rollback'));
+		message(treeArr);
 	});
+};
+
+const message = function(treeArr){
+	const group = _.groupBy(treeArr,'type');
+	if (1 < group.directory.length) {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directories, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directories, ${group.file.length} file`);
+		}
+	} else {
+		if (1 < group.file.length) {
+			console.log(`${group.directory.length} directory, ${group.file.length} files`);
+		}else{
+			console.log(`${group.directory.length} directory, ${group.file.length} file`);
+		}
+	}
 };
