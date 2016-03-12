@@ -1,7 +1,7 @@
 {
   "name": "tatami",
-  "version": "1.0.0",
-  "description": "Tatami is tool for making folder structure",
+  "version": "1.0.1",
+  "description": "Tatami is command line tool for making folder structure",
   "dependencies": {
     "async": "^1.5.2",
     "commander": "^2.9.0",

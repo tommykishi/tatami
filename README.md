@@ -89,5 +89,9 @@ tatami path
 ```
 `tatami path` output path to result parsing Tatamifile.
 
+## Link
+page: http://tommykishi.github.io/tatami/
+npm:
+
 ## Lisense
 MIT
