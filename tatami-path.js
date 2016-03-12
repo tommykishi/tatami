@@ -1,14 +1,22 @@
+#!/usr/bin/env node
 //tatami path
+
 'use strict'
 const program = require('commander'),
 	_ = require('lodash'),
-	fs = require('fs'),
-	colors = require('colors');
+	fs = require('fs');
 
 const parser = require('./peg/peg.js'),
 	model = require('./model.js');
 
 program.parse(process.argv);
+
+const flag = model.argValidate(program.args);
+
+if (!flag.status) {
+	console.log(flag.message);
+	process.exit(1);
+}
 
 fs.stat('./Tatamifile', (err, stat) => {
 	const arr = [];
@@ -30,7 +38,7 @@ fs.stat('./Tatamifile', (err, stat) => {
 		});
 
 	} else if (err.code == 'ENOENT') {
-		console.log(colors.red.bold('Tatamifile not found'));
+		console.log('Tatamifile not found');
 	} else {
 		console.log('Some other error: ', err.code);
 	}
@@ -39,24 +47,7 @@ fs.stat('./Tatamifile', (err, stat) => {
 const pathlog = function(arr) {
 	const treeArr = new model.Tree(arr).getArray();
 	_.map(treeArr, function(node, index) {
-		console.log(` ${colors.cyan(index)} ${process.cwd()}${_.at(node,'path').toString()}`);
+		console.log(` ${index+1} ${process.cwd()}${_.at(node,'path').toString()}`);
 	});
-	message(treeArr);
+	console.log(model.message(treeArr));
 };
-
-const message = function(treeArr){
-	const group = _.groupBy(treeArr,'type');
-	if (1 < group.directory.length) {
-		if (1 < group.file.length) {
-			console.log(`${group.directory.length} directories, ${group.file.length} files`);
-		}else{
-			console.log(`${group.directory.length} directories, ${group.file.length} file`);
-		}
-	} else {
-		if (1 < group.file.length) {
-			console.log(`${group.directory.length} directory, ${group.file.length} files`);
-		}else{
-			console.log(`${group.directory.length} directory, ${group.file.length} file`);
-		}
-	}
-}

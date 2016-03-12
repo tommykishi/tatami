@@ -1,4 +1,4 @@
-# tatami
+# Tatami
 [![Build Status](https://travis-ci.org/tommykishi/tatami.svg?branch=master)](https://travis-ci.org/tommykishi/tatami)
 
 Tatami is command line tool for making folder structure.
@@ -13,7 +13,7 @@ npm install -g tatami
 ```
 tatami init
 ```
-In current directory, tatami creates Tatamifile.
+`tatami init` create Tatamifile in current directory.
 
 2. Edit Tatamifile
 
@@ -21,6 +21,7 @@ In current directory, tatami creates Tatamifile.
 ```
 tatami run
 ```
+`tatami run` parses Tatamifile, make folder structure.
 
 ## Learn Tatamifile DSL in 30 seconds
 
@@ -64,7 +65,7 @@ README.md
 directory/ -> 'directory'
 ```
 
-* When word has extension or no extension, tatami recognizes "File".
+* When word includes extension or no extension, tatami recognizes "File".
 ```
 Makefile -> 'file'
 README.md -> 'file'
@@ -76,17 +77,17 @@ README.md -> 'file'
 ```
 tatami parses by oneline, at this stage only one line comment is allowed.
 
-## other command
+## Other command
 
-parses Tatamifile, rollback before tatami run.
 ```
 tatami rollback
 ```
+`tatami rollback` parses Tatamifile, rollback before tatami run.
 
-output path to result parsing Tatamifile.
 ```
 tatami path
 ```
+`tatami path` output path to result parsing Tatamifile.
 
 ## Lisense
 MIT
